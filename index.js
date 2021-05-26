@@ -4,25 +4,18 @@ const inquirer = require('inquirer')
 const questions = [
   {
     type: 'input',
-    name: 'file',
-    message: 'Which functions and files would you like to create?\n',
+    name: 'name',
+    message: "What is the name of the files you'd like to add?\n",
+  },
+  {
+    type: 'checkbox',
+    message: 'Please select a file-type',
+    name: 'fileTypes',
+    choices: [{ name: 'component' }, { name: 'spec' }, { name: 'stories' }],
   },
 ]
 
 inquirer.prompt(questions).then(answers => {
-  const files = answers['file'].split(',').map(el => el.trim())
-  files.forEach(file => writeFile(file))
+  const names = answers['name'].split(',').map(el => el.trim())
+  names.forEach(name => writeFile(name))
 })
-
-// rl.question(
-//   'Which functions and files would you like to create? Please separate by comma. ',
-//   answer => {
-//     answer.split(',').map(name => writeFile(name.trim()))
-
-//     // for each word a new file, separate by comma
-//     // writeFile([answer])
-//     console.log([answer])
-
-//     rl.close()
-//   }
-// )
